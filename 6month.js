@@ -11,27 +11,45 @@
 
 // var months = 6;
 var premium = [];
-var sum = 0;
+var totalPremium = 0;
+var newPremium = [];
+
 function pushFunction(){
-    
-    premium.push(document.getElementById('premiumInput').value);
+    premium.push(document.getElementById('premiumInput').valueAsNumber);
     premiumInput.value = '';
+    totalPremium = (document.getElementById('totalPremiumInput').valueAsNumber);
+    totalPremiumInput.value = '';
 }
 
+function difference()   {
+    var difference = totalPremium - sum;
+    var newPremium = [];
+    
+    newPremium = difference - premium[i];
+}
 
 function calculatePremium() {
     if (premium.length === 0){
-        console.log('No amount has been entered');
+        alert('No amount has been entered');
     }   else{
+        var sum = 0;
         for (var i = 0; i > premium.length; i++){
-                sum = premium.reduce( function(total, amount){
-                return total + amount;
-                
-            });
+            sum += premium[i];
+        }  
+        document.getElementById('oldPremium').innerHTML = premium;     
+        console.log(premium);
+        
+        
+        if (difference === 0)   {
+            document.getElementById('newPremium').innerHTML = premium;
+        } else if (difference < 0)    {
+            premium.map(difference);
+            document.getElementById('newPremium').innerHTML = premium;
+        } else{
+            premium.map(difference);
+            document.getElementById('newPremium').innerHTML = premium;
         }
-        console.log(sum);
     } 
-    
 }
 
 
