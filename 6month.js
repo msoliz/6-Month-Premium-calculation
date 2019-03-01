@@ -9,58 +9,58 @@
 //table should be dynamic? already are with bootstrap cards
 
 
-// var months = 6;
+var months = 6;
 var premium = [];
 var totalPremium = 0;
 var newPremium = [];
+var newDifference = 0;
+var differenceWithRounding = 0;
+var sum = 0;
 
 function pushFunction(){
     premium.push(document.getElementById('premiumInput').valueAsNumber);
     premiumInput.value = '';
+}
+function push2Function(){
     totalPremium = (document.getElementById('totalPremiumInput').valueAsNumber);
     totalPremiumInput.value = '';
 }
 
+function getSum(total, num) {
+    sum = total + num;
+    return sum;
+}
+
 function difference()   {
-    var difference = totalPremium - sum;
-    var newPremium = [];
-    
-    newPremium = difference - premium[i];
+    newDifference = (totalPremium - premium.reduce(getSum)) / premium.length;
+    //rounds decimal place 2, without rounding errors of parseFloat
+    differenceWithRounding = Number(Math.round(newDifference+'e2')+'e-2');
+    return differenceWithRounding;
 }
 
 function calculatePremium() {
     if (premium.length === 0){
         alert('No amount has been entered');
     }   else{
-        var sum = 0;
-        for (var i = 0; i > premium.length; i++){
-            sum += premium[i];
-        }  
-        document.getElementById('oldPremium').innerHTML = premium;     
-        console.log(premium);
-        
-        
-        if (difference === 0)   {
-            document.getElementById('newPremium').innerHTML = premium;
-        } else if (difference < 0)    {
-            premium.map(difference);
-            document.getElementById('newPremium').innerHTML = premium;
+        difference(); 
+        document.getElementById('oldPremium').innerHTML = premium;
+
+        if (sum < totalPremium)   {
+            newPremium = premium.map(function(newPremium) {
+                return newPremium + this.differenceWithRounding;
+            });
+            document.getElementById('newPremium').innerHTML = newPremium;
+            console.table(newPremium);
+        } else if (sum > totalPremium)    {
+            newPremium = numbers.map(function(newPremium) {
+                return newPremium - differenceWithRounding;
+            });
+            document.getElementById('newPremium').innerHTML = newPremium;
+            console.table(newPremium);
         } else{
-            premium.map(difference);
             document.getElementById('newPremium').innerHTML = premium;
+            console.table(newPremium);
         }
     } 
 }
-
-
-
-   
-
-
-
-
-
-
-
-
 
