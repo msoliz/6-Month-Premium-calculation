@@ -47,7 +47,7 @@ function calculatePremium() {
 
         if (sum < totalPremium)   {
             newPremium = premium.map(function(newPremium) {
-                return newPremium + this.differenceWithRounding;
+                return newPremium + differenceWithRounding;
             });
             document.getElementById('newPremium').innerHTML = newPremium;
             console.table(newPremium);
