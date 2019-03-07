@@ -6,16 +6,12 @@
 
 //display new amounts per veh and verify the add up to monthly premium
 
-//table should be dynamic? already are with bootstrap cards
-
-
 var months = 6;
 var premium = [];
 var totalPremium = 0;
-var newPremium = [];
+var sum = 0;
 var newDifference = 0;
 var differenceWithRounding = 0;
-var sum = 0;
 
 function pushFunction(){
     premium.push(document.getElementById('premiumInput').valueAsNumber);
@@ -26,41 +22,40 @@ function push2Function(){
     totalPremiumInput.value = '';
 }
 
-function getSum(total, num) {
-    sum = total + num;
-    return sum;
+function getSum(total, acc) {
+    return total + acc;
 }
 
 function difference()   {
-    newDifference = (totalPremium - premium.reduce(getSum)) / premium.length;
+    sum = premium.reduce(getSum);
+    newDifference = (totalPremium - sum) / premium.length;
     //rounds decimal place 2, without rounding errors of parseFloat
     differenceWithRounding = Number(Math.round(newDifference+'e2')+'e-2');
     return differenceWithRounding;
+}
+function positiveMap(num)  {
+    differenceWithRounding = Number(Math.round(newDifference+'e2')+'e-2');
+    return num + differenceWithRounding;
+}
+function negativeMap()  {
+    return premium - differenceWithRounding;
 }
 
 function calculatePremium() {
     if (premium.length === 0){
         alert('No amount has been entered');
     }   else{
-        difference(); 
+        difference();
         document.getElementById('oldPremium').innerHTML = premium;
-
         if (sum < totalPremium)   {
-            newPremium = premium.map(function(newPremium) {
-                return newPremium + differenceWithRounding;
-            });
-            document.getElementById('newPremium').innerHTML = newPremium;
-            console.table(newPremium);
+            document.getElementById('newPremium').innerHTML = premium.map(positiveMap);
+            console.table(premium.map(positiveMap));
         } else if (sum > totalPremium)    {
-            newPremium = numbers.map(function(newPremium) {
-                return newPremium - differenceWithRounding;
-            });
-            document.getElementById('newPremium').innerHTML = newPremium;
-            console.table(newPremium);
+            document.getElementById('newPremium').innerHTML = premium;
         } else{
             document.getElementById('newPremium').innerHTML = premium;
-            console.table(newPremium);
         }
     } 
 }
+
 
