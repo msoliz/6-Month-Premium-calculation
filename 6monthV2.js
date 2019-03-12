@@ -10,8 +10,6 @@ var newPremium = [];
 var monthlyPayment = 0;
 var dividedPremiums = [];
 var sumOfDividedPremiums = 0;
-var newDifference = 0;
-var differenceWithRounding = 0;
 var monthlyPremiumDifference = 0;
 var finalPremium = [];
 var finalDifference = 0;
@@ -51,19 +49,12 @@ function positiveMap(num)  {
 }
 function negativeMap(num)  {
     finalPremium = newPremium.map(function(num){
+        finalDifference = Number(Math.abs(finalDifference));
         finalPremium = num - finalDifference;
         finalPremium = Number(Math.round(finalPremium +'e2')+'e-2');
         return finalPremium;
     });
 }
-
-// function calculatePremium() {
-//     dividePremium();
-//     positiveMap();
-//     console.table(newPremium);
-//     console.table(finalPremium);
-//     console.log(monthlyPremiumDifference);
-// }
 
 function calculatePremium() {
     if (premium.length === 0){
