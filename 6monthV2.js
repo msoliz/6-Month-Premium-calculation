@@ -1,8 +1,9 @@
 //project should display 6 month premium per vehicle
 //it should divide premium of veh by 6 monthly payments
-//if total of newly divided premiums less than total premium
+//if sum of newly divided premiums less than total premium
 //get difference and add back to divided premiums
-//display new amounts per veh and verify the add up to monthly premium
+//if negative difference, turn into absolute value and subtract from divided premiums
+//display new amounts per vehicle
 
 var MONTHS = 6;
 var premium = [];
@@ -57,21 +58,39 @@ function negativeMap(num)  {
 }
 
 function calculatePremium() {
-    if (premium.length === 0){
+    if (premium.length === 0 || monthlyPayment === 0){
         alert('No amount has been entered');
     }   else{
         dividePremium();
-        document.getElementById('oldPremium').innerHTML = newPremium;
         if (monthlyPremiumDifference > 0)   {
             positiveMap();
-            document.getElementById('newPremium').innerHTML = finalPremium;
+            view();
         } else if (monthlyPremiumDifference < 0)    {
             negativeMap();
-            document.getElementById('newPremium').innerHTML = finalPremium;
+            view();
         } else{
-            document.getElementById('newPremium').innerHTML = newPremium;
+            view();
         }
     } 
+}
+
+function view()    {
+    
+    for (var i = 0; i < finalPremium.length; i++) {
+        var oldPremiumOl = document.getElementById('oldPremiumLi');
+        var newPremiumOl = document.getElementById('newPremiumLi');
+
+        var oldPremiumLi = document.createElement('li');
+        oldPremiumLi.className = 'list-group-item';
+        var newPremiumLi = document.createElement('li');
+        newPremiumLi.className = 'list-group-item';
+
+        oldPremiumLi.textContent = '$' + newPremium[i];
+        newPremiumLi.textContent = '$' + finalPremium[i];
+
+        oldPremiumOl.appendChild(oldPremiumLi);
+        newPremiumOl.appendChild(newPremiumLi);
+    }
 }
 
 
