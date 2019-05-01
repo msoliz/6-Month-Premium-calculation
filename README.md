@@ -1,4 +1,6 @@
 # 6-Month-Premium-calculation
+IE not supported currently
+
 project should display 6 month premium per vehicle
 it should divide premium of veh by 6 monthly payments
 if sum of newly divided premiums less than total premium
