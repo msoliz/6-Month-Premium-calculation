@@ -9,18 +9,17 @@ var MONTHS = 6;
 var premium = [];
 var newPremium = [];
 var monthlyPayment = 0;
-var dividedPremiums = [];
 var sumOfDividedPremiums = 0;
 var monthlyPremiumDifference = 0;
 var finalPremium = [];
 var finalDifference = 0;
 
 function pushFunction(){
-    premium.push(document.getElementById('premiumInput').valueAsNumber);
+    premium.push(document.getElementById('premiumInput').value);
     premiumInput.value = '';
 }
 function push2Function(){
-    monthlyPayment = (document.getElementById('monthlyPaymentInput').valueAsNumber);
+    monthlyPayment = (document.getElementById('monthlyPaymentInput').value);
     monthlyPaymentInput.value = '';
 }
 
@@ -57,23 +56,6 @@ function negativeMap(num)  {
     });
 }
 
-function calculatePremium() {
-    if (premium.length === 0 || monthlyPayment === 0){
-        alert('No amount has been entered');
-    }   else{
-        dividePremium();
-        if (monthlyPremiumDifference > 0)   {
-            positiveMap();
-            view();
-        } else if (monthlyPremiumDifference < 0)    {
-            negativeMap();
-            view();
-        } else{
-            view();
-        }
-    } 
-}
-
 function view()    {
     
     for (var i = 0; i < finalPremium.length; i++) {
@@ -93,4 +75,19 @@ function view()    {
     }
 }
 
-
+function calculatePremium() {
+    if (premium.length === 0 || monthlyPayment === 0){
+        alert('No amount has been entered');
+    }   else{
+        dividePremium();
+        if (monthlyPremiumDifference > 0)   {
+            positiveMap();
+            view();
+        } else if (monthlyPremiumDifference < 0)    {
+            negativeMap();
+            view();
+        } else{
+            view();
+        }
+    } 
+}
